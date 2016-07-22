@@ -8,33 +8,55 @@ namespace ApplicationLogic
 {
     public class GameOfLifeRules
     {
-        int[,] GameOfLifeBoard;
+       // int[,] GameOfLifeBoard;
+        int maxBoardValue = 2;
 
         public int[,] RunLifeCycle(int[,] currentboard)
         {
-            GameOfLifeBoard = currentboard;
-            var boardCoppy = currentboard;
-            var nextBoard = currentboard;
+            int[,] nextBoard = new int[3,3];
 
-            var responce = GetNewCellState(CellState.Alive, getLiveNeighborsNumber(1,1));
-
-            if (responce == CellState.Dead)
+            for(var Row = 0; Row <= maxBoardValue; Row++)
             {
-                nextBoard[1, 1] = 0;
-            }
+                for(var Col = 0; Col <= maxBoardValue; Col++)
+                {
+                    CellState currentCellState = (CellState)currentboard[Row, Col];
+                    var responce = GetNewCellState(currentCellState, getLiveNeighborsNumber(Row, Col, currentboard));
 
+                    if (responce == CellState.Dead)
+                    {
+                        nextBoard[Row, Col] = 0;
+                    }
+                    if (responce == CellState.Alive)
+                    {
+                        nextBoard[Row, Col] = 1;
+                    }
+                }
+            }
 
             return nextBoard;
         }
 
-        private int getLiveNeighborsNumber(int xlocation, int ylocation)
+        private int getLiveNeighborsNumber(int row, int col, int[,] board)
         {
             int liveNeighborCount = 0;
+            int north=0; int south=0; int east=0;  int west=0;
 
-            var north = GameOfLifeBoard[xlocation, ylocation - 1]; //north
-            var south = GameOfLifeBoard[xlocation, ylocation + 1]; //south
-            var west =  GameOfLifeBoard[xlocation - 1, ylocation]; //West
-            var east = GameOfLifeBoard[xlocation + 1, ylocation]; //East
+            if (0 < row)
+            {
+                north = board[row -1, col]; //north
+            }
+            if (row < maxBoardValue)
+            { 
+                south = board[row + 1, col]; //south 
+            }
+            if (0 < col)
+            {
+                west = board[row, col -1]; //West
+            }
+            if (col < maxBoardValue)
+            {
+                east = board[row, col +1]; //East 
+            }
 
             if (north == 1) { liveNeighborCount += 1; };
             if (south == 1) { liveNeighborCount += 1; };
@@ -59,7 +81,10 @@ namespace ApplicationLogic
                 }
             }
             else if (liveNeighbors == 3)
+            {
                 return CellState.Alive;
+            }
+                
 
 
             return currentState;

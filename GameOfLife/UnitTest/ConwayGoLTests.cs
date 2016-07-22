@@ -2,8 +2,46 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ApplicationLogic;
 
-namespace UnitTest
+namespace ConwayGoLTest
 {
+    [TestClass]
+    public class FullBoardTest
+    {
+        [TestMethod]
+        public void CenterLivesOtherDie()
+        {
+            //Arrange
+            GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            int[,] currentboard = { { 0, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 } };
+
+            //Act
+            var answer = GameOfLife.RunLifeCycle(currentboard);
+
+            //Assert
+            int[,] expectedEndBoard = { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
+            var areEqual = CheckForEqualBoards(answer, expectedEndBoard);
+            Assert.IsTrue(areEqual);
+        }
+
+        private bool CheckForEqualBoards(int[,] answer, int[,] expectedEndBoard)
+        {
+            var areEqual = true;
+
+            for (var Row = 0; Row <= 2; Row++)
+            {
+                for (var Col = 0; Col <= 2; Col++)
+                {
+                    if (answer[Row,Col] != expectedEndBoard[Row, Col])
+                    {
+                        areEqual = false;
+                    }
+                }
+            }
+
+            return areEqual;
+        }
+    }
+
     [TestClass]
     public class NeighborTest
     {
@@ -22,6 +60,70 @@ namespace UnitTest
             int[,] expectedEndBoard = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
             Assert.AreEqual(expectedEndBoard[1,1], answer[1,1]);
         }
+
+        [TestMethod]
+        public void TwoNeighbors()
+        {
+            //Arrange
+            GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            int[,] currentboard = { { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 } };
+
+            //Act
+
+            var answer = GameOfLife.RunLifeCycle(currentboard);
+
+            //Assert
+            int[,] expectedEndBoard = { { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 } };
+            Assert.AreEqual(expectedEndBoard[1, 1], answer[1, 1]);
+        }
+
+        [TestMethod]
+        public void BornWithThreeNeighbors()
+        {
+            //Arrange
+            GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            int[,] currentboard = { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 0, 0 } };
+
+            //Act
+
+            var answer = GameOfLife.RunLifeCycle(currentboard);
+
+            //Assert
+            int[,] expectedEndBoard = { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 0, 0 } };
+            Assert.AreEqual(expectedEndBoard[1, 1], answer[1, 1]);
+        }
+
+        [TestMethod]
+        public void FourNeighborsNoChange()
+        {
+            //Arrange
+            GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            int[,] currentboard = { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 1, 0 } };
+
+            //Act
+
+            var answer = GameOfLife.RunLifeCycle(currentboard);
+
+            //Assert
+            int[,] expectedEndBoard = { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 1, 0 } };
+            Assert.AreEqual(expectedEndBoard[1, 1], answer[1, 1]);
+        }
+        [TestMethod]
+        public void FourNeighborsDie()
+        {
+            //Arrange
+            GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            int[,] currentboard = { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 } };
+
+            //Act
+
+            var answer = GameOfLife.RunLifeCycle(currentboard);
+
+            //Assert
+            int[,] expectedEndBoard = { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 1, 0 } };
+            Assert.AreEqual(expectedEndBoard[1, 1], answer[1, 1]);
+        }
+
     }
 
     [TestClass]
