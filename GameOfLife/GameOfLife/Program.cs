@@ -11,7 +11,7 @@ namespace GameOfLife
     {
         static void Main(string[] args)
         {
-            int[,] board = { { 0, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 } };
+            int[,] board = { { 1, 1, 0 }, { 1, 0, 0 }, { 0, 1, 0 } };
             GameOfLifeRules life = new GameOfLifeRules();
             Console.WriteLine(life.PrintGameBoard(board));        
             Console.ReadLine();

@@ -105,7 +105,7 @@ namespace ApplicationLogic
         {
             var columnLength = board.GetLength(0);
             var rowLength = board.GetLength(1);
-            string boardString="";
+            string boardString= "------------\n";
 
             for (var Row = 0; Row <= maxBoardValue; Row++)
             {
@@ -115,14 +115,14 @@ namespace ApplicationLogic
 
                     if (cellValue == 1)
                     {
-                        boardString += "X";
+                        boardString += " X |";
                     }
                     if (cellValue == 0)
                     {
-                        boardString += " ";
+                        boardString += "   |";
                     }
                 }
-                boardString += "\n";
+                boardString += "\n------------\n";
             }
             return boardString;
         }
