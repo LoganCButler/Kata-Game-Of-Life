@@ -23,7 +23,38 @@ namespace ConwayGoLTest
             Assert.IsTrue(areEqual);
         }
 
-        private bool CheckForEqualBoards(int[,] answer, int[,] expectedEndBoard)
+        [TestMethod]
+        public void OnlyEdgesLive()
+        {
+            //Arrange
+            GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            int[,] currentboard = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+
+            //Act
+            var answer = GameOfLife.RunLifeCycle(currentboard);
+
+            //Assert
+            int[,] expectedEndBoard = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+            var areEqual = CheckForEqualBoards(answer, expectedEndBoard);
+            Assert.IsTrue(areEqual);
+        }
+        [TestMethod]
+        public void OneBornOneLivesOneDies()
+        {
+            //Arrange
+            GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            int[,] currentboard = { { 0, 1, 1 }, { 0, 0, 1 }, { 0, 1, 0 } };
+
+            //Act
+            var answer = GameOfLife.RunLifeCycle(currentboard);
+
+            //Assert
+            int[,] expectedEndBoard = { { 0, 0, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
+            var areEqual = CheckForEqualBoards(answer, expectedEndBoard);
+            Assert.IsTrue(areEqual);
+        }
+
+        public bool CheckForEqualBoards(int[,] answer, int[,] expectedEndBoard)
         {
             var areEqual = true;
 

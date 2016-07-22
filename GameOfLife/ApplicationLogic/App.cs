@@ -36,6 +36,8 @@ namespace ApplicationLogic
             return nextBoard;
         }
 
+        
+
         private int getLiveNeighborsNumber(int row, int col, int[,] board)
         {
             int liveNeighborCount = 0;
@@ -97,5 +99,34 @@ namespace ApplicationLogic
             Dead = 0,
             Alive = 1,         
         }
+
+
+        public string PrintGameBoard(int[,] board)
+        {
+            var columnLength = board.GetLength(0);
+            var rowLength = board.GetLength(1);
+            string boardString="";
+
+            for (var Row = 0; Row <= maxBoardValue; Row++)
+            {
+                for (var Col = 0; Col <= maxBoardValue; Col++)
+                {
+                    int cellValue = board[Row, Col];   
+
+                    if (cellValue == 1)
+                    {
+                        boardString += "X";
+                    }
+                    if (cellValue == 0)
+                    {
+                        boardString += " ";
+                    }
+                }
+                boardString += "\n";
+            }
+            return boardString;
+        }
     }
+
+   
 }
