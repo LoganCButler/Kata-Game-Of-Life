@@ -13,11 +13,15 @@ namespace GameOfLife
         {
             int[,] board = { { 1, 1, 0 }, { 1, 0, 0 }, { 0, 1, 0 } };
             GameOfLifeRules life = new GameOfLifeRules();
-            Console.WriteLine(life.PrintGameBoard(board));        
+            Console.WriteLine("Here is the starting board. Press enter to run a Life round.\n"+life.PrintGameBoard(board));
             Console.ReadLine();
-            int[,] newboard = life.RunLifeCycle(board);
-            Console.WriteLine( life.PrintGameBoard(newboard));
-            Console.ReadLine();
+            do
+            {              
+                int[,] newboard = life.RunLifeCycle(board);
+                board = newboard;
+                Console.WriteLine("Here is the starting board. Press enter to run a Life round.\n"+life.PrintGameBoard(newboard));
+                Console.ReadLine(); 
+            } while (true);
         }
     }
 }

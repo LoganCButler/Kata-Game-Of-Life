@@ -42,28 +42,53 @@ namespace ApplicationLogic
         {
             int liveNeighborCount = 0;
             int north=0; int south=0; int east=0;  int west=0;
+            int northWest=0; int northEast=0; int southWest=0; int southEast = 0;
 
             if (0 < row)
             {
                 north = board[row -1, col]; //north
             }
+            if (0 < col)
+            {
+                west = board[row, col - 1]; //West
+            }
             if (row < maxBoardValue)
             { 
                 south = board[row + 1, col]; //south 
             }
-            if (0 < col)
-            {
-                west = board[row, col -1]; //West
-            }
+            
             if (col < maxBoardValue)
             {
                 east = board[row, col +1]; //East 
+            }
+
+
+            if (0 < row && 0 < col)
+            {
+                northWest = board[row - 1, col - 1]; //north West
+            }
+            if (0 < row && col < maxBoardValue)
+            {
+                northEast = board[row - 1, col + 1]; //north East
+            }
+            if (row < maxBoardValue && 0 < col)
+            {
+                southWest = board[row + 1, col - 1]; //South West
+            }
+            if (row < maxBoardValue && col < maxBoardValue)
+            {
+                southEast = board[row + 1, col + 1]; //South East
             }
 
             if (north == 1) { liveNeighborCount += 1; };
             if (south == 1) { liveNeighborCount += 1; };
             if (west == 1) { liveNeighborCount += 1; };
             if (east == 1) { liveNeighborCount += 1; };
+
+            if (northEast == 1) { liveNeighborCount += 1; };
+            if (northWest == 1) { liveNeighborCount += 1; };
+            if (southEast == 1) { liveNeighborCount += 1; };
+            if (southWest == 1) { liveNeighborCount += 1; };
 
 
             return liveNeighborCount;

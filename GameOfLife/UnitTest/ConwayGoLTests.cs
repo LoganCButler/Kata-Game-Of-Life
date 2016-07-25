@@ -8,7 +8,7 @@ namespace ConwayGoLTest
     public class FullBoardTest
     {
         [TestMethod]
-        public void CenterLivesOtherDie()
+        public void EveryoneLivesAndOneIsBorn()
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
@@ -18,13 +18,13 @@ namespace ConwayGoLTest
             var answer = GameOfLife.RunLifeCycle(currentboard);
 
             //Assert
-            int[,] expectedEndBoard = { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
+            int[,] expectedEndBoard = { { 0, 0, 0 }, { 1, 1, 0 }, { 1, 1, 0 } };
             var areEqual = CheckForEqualBoards(answer, expectedEndBoard);
             Assert.IsTrue(areEqual);
         }
 
         [TestMethod]
-        public void OnlyEdgesLive()
+        public void OnlyCornersLive()
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
@@ -34,12 +34,12 @@ namespace ConwayGoLTest
             var answer = GameOfLife.RunLifeCycle(currentboard);
 
             //Assert
-            int[,] expectedEndBoard = { { 1, 1, 1 }, { 1, 0, 1 }, { 1, 1, 1 } };
+            int[,] expectedEndBoard = { { 1, 0, 1 }, { 0, 0, 0 }, { 1, 0, 1 } };
             var areEqual = CheckForEqualBoards(answer, expectedEndBoard);
             Assert.IsTrue(areEqual);
         }
         [TestMethod]
-        public void OneBornOneLivesOneDies()
+        public void LiveBornAndDie()
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
@@ -49,7 +49,7 @@ namespace ConwayGoLTest
             var answer = GameOfLife.RunLifeCycle(currentboard);
 
             //Assert
-            int[,] expectedEndBoard = { { 0, 0, 1 }, { 0, 1, 0 }, { 0, 0, 0 } };
+            int[,] expectedEndBoard = { { 0, 1, 1 }, { 0, 0, 1 }, { 0, 0, 0 } };
             var areEqual = CheckForEqualBoards(answer, expectedEndBoard);
             Assert.IsTrue(areEqual);
         }
