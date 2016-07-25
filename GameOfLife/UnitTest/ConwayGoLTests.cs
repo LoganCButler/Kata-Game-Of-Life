@@ -12,6 +12,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 0, 0, 0 }, { 1, 1, 0 }, { 0, 1, 0 } };
 
             //Act
@@ -28,6 +30,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
 
             //Act
@@ -43,6 +47,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 0, 1, 1 }, { 0, 0, 1 }, { 0, 1, 0 } };
 
             //Act
@@ -81,6 +87,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 0, 0, 0 }, {0,1,0 }, {0,0,0 } };
 
             //Act
@@ -97,6 +105,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 0, 0, 0 }, { 1, 1, 1 }, { 0, 0, 0 } };
 
             //Act
@@ -113,6 +123,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 0, 0 } };
 
             //Act
@@ -129,6 +141,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 0, 1, 0 }, { 1, 0, 1 }, { 0, 1, 0 } };
 
             //Act
@@ -144,6 +158,8 @@ namespace ConwayGoLTest
         {
             //Arrange
             GameOfLifeRules GameOfLife = new GameOfLifeRules();
+            GameOfLife.boardDimention = 3;
+            GameOfLife.maxBoardIndexValue = 2;
             int[,] currentboard = { { 0, 1, 0 }, { 1, 1, 1 }, { 0, 1, 0 } };
 
             //Act

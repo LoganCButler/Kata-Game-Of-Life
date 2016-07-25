@@ -2,22 +2,45 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ApplicationLogic
 {
     public class GameOfLifeRules
     {
-       // int[,] GameOfLifeBoard;
-        int maxBoardValue = 2;
+       public  int boardDimention = 10;
+        public int maxBoardIndexValue = 9;
+
+        public int[,] CreateRandomSeed()
+        {
+            
+            int[,] freshBoard = new int[boardDimention, boardDimention];
+
+            for (var Row = 0; Row <= maxBoardIndexValue; Row++)
+            {
+                for (var Col = 0; Col <= maxBoardIndexValue; Col++)
+                {
+                    Random r = new Random();
+                    int number = r.Next(2);
+                    freshBoard[Row, Col] = number;
+                    int milliseconds = 10;
+                    Thread.Sleep(milliseconds);
+                }
+            }
+
+
+            return freshBoard;
+        }
+        
 
         public int[,] RunLifeCycle(int[,] currentboard)
         {
-            int[,] nextBoard = new int[3,3];
+            int[,] nextBoard = new int[boardDimention,boardDimention];
 
-            for(var Row = 0; Row <= maxBoardValue; Row++)
+            for(var Row = 0; Row <= maxBoardIndexValue; Row++)
             {
-                for(var Col = 0; Col <= maxBoardValue; Col++)
+                for(var Col = 0; Col <= maxBoardIndexValue; Col++)
                 {
                     CellState currentCellState = (CellState)currentboard[Row, Col];
                     var responce = GetNewCellState(currentCellState, getLiveNeighborsNumber(Row, Col, currentboard));
@@ -52,12 +75,12 @@ namespace ApplicationLogic
             {
                 west = board[row, col - 1]; //West
             }
-            if (row < maxBoardValue)
+            if (row < maxBoardIndexValue)
             { 
                 south = board[row + 1, col]; //south 
             }
             
-            if (col < maxBoardValue)
+            if (col < maxBoardIndexValue)
             {
                 east = board[row, col +1]; //East 
             }
@@ -67,15 +90,15 @@ namespace ApplicationLogic
             {
                 northWest = board[row - 1, col - 1]; //north West
             }
-            if (0 < row && col < maxBoardValue)
+            if (0 < row && col < maxBoardIndexValue)
             {
                 northEast = board[row - 1, col + 1]; //north East
             }
-            if (row < maxBoardValue && 0 < col)
+            if (row < maxBoardIndexValue && 0 < col)
             {
                 southWest = board[row + 1, col - 1]; //South West
             }
-            if (row < maxBoardValue && col < maxBoardValue)
+            if (row < maxBoardIndexValue && col < maxBoardIndexValue)
             {
                 southEast = board[row + 1, col + 1]; //South East
             }
@@ -130,11 +153,11 @@ namespace ApplicationLogic
         {
             var columnLength = board.GetLength(0);
             var rowLength = board.GetLength(1);
-            string boardString= "------------\n";
+            string boardString= "---------------------------------------------\n";
 
-            for (var Row = 0; Row <= maxBoardValue; Row++)
+            for (var Row = 0; Row <= maxBoardIndexValue; Row++)
             {
-                for (var Col = 0; Col <= maxBoardValue; Col++)
+                for (var Col = 0; Col <= maxBoardIndexValue; Col++)
                 {
                     int cellValue = board[Row, Col];   
 
@@ -147,7 +170,7 @@ namespace ApplicationLogic
                         boardString += "   |";
                     }
                 }
-                boardString += "\n------------\n";
+                boardString += "\n---------------------------------------------\n";
             }
             return boardString;
         }
